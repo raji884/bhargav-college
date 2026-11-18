@@ -1,0 +1,55 @@
+/** @type {import('next').NextConfig} */
+const securityHeaders = [
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+  // microphone=(self): the AI Voice Agent may ask for the mic on this site only (still blocked for embeds).
+  { key: 'Permissions-Policy', value: 'camera=(), microphone=(self), geolocation=()' },
+];
+
+const nextConfig = {
+  poweredByHeader: false,
+  // NEXT_DIST_DIR lets a production build run while `next dev` holds .next (default unchanged).
+  distDir: process.env.NEXT_DIST_DIR || '.next',
+  reactStrictMode: true,
+  // CSV lead imports send the file text to a server action (2 MB file limit + JSON overhead).
+  experimental: { serverActions: { bodySizeLimit: '3mb' } },
+  // Route names from the brief (§10) that map onto pages already built under other paths.
+  async redirects() {
+    const alias = (source, destination) => ({ source, destination, permanent: false });
+    return [
+      alias('/vision', '/about#vision'),
+      alias('/courses', '/programs'),
+      alias('/courses/:slug', '/programs/:slug'),
+      alias('/bsat', '/scholarship'),
+      alias('/dashboard', '/crm'),
+      alias('/dashboard/management', '/crm/dashboard'),
+      alias('/dashboard/crm', '/crm/leads'),
+      alias('/dashboard/crm/:id', '/crm/leads/:id'),
+      alias('/dashboard/followups', '/crm'),
+      alias('/dashboard/visits', '/crm/visits'),
+      alias('/dashboard/verification', '/crm/verification'),
+      alias('/dashboard/students', '/crm/students'),
+      alias('/dashboard/attendance', '/crm/academics'),
+      alias('/dashboard/exams', '/crm/academics'),
+      alias('/dashboard/fees', '/crm/accounts'),
+      alias('/dashboard/notices', '/crm/notices'),
+      alias('/dashboard/hostel', '/crm/hostel'),
+      alias('/dashboard/transport', '/crm/transport'),
+      alias('/dashboard/users', '/crm/staff'),
+      alias('/dashboard/ai-assistant', '/crm/college-assistant'),
+      alias('/dashboard/practice', '/crm/practice'),
+      alias('/dashboard/summary', '/crm/summary'),
+      alias('/dashboard/syllabus', '/crm/syllabus'),
+      alias('/dashboard/knowledge-base', '/crm/cms/knowledgeBase'),
+      alias('/dashboard/doubts', '/crm/academics/my-classes'),
+      alias('/student', '/app'),
+      alias('/parent', '/app'),
+    ];
+  },
+  async headers() {
+    return [{ source: '/(.*)', headers: securityHeaders }];
+  },
+};
+
+export default nextConfig;

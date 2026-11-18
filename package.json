@@ -1,0 +1,44 @@
+{
+  "name": "bhargava-junior-college",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "seed:demo": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/seed-demo.ts",
+    "seed:demo:reset": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/seed-demo.ts --clear && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/seed-demo.ts",
+    "seed:demo:clear": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/seed-demo.ts --clear",
+    "seed:supabase": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/seed-supabase.ts",
+    "seed:supabase:clear": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/seed-supabase.ts --clear"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.4.0",
+    "@supabase/supabase-js": "2.45.4",
+    "next": "^14.2.28",
+    "nodemailer": "^6.9.16",
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "server-only": "^0.0.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.11",
+    "@types/nodemailer": "^6.4.17",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  },
+  "engines": {
+    "node": ">=18.18"
+  }
+}
